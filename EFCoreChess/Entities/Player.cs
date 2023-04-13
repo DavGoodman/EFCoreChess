@@ -4,31 +4,62 @@ namespace EFCoreChess.Entities
 {
     public class Player
     {
+        //public Player()
+        //{
+        //    _allGames = new List<ChessGame>();
+        //}
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
+        public int? Rating { get; set; }
+
+
 
         [InverseProperty("BlackPlayer")]
         public List<ChessGame>? BlackGames { get; set; }
 
+
         [InverseProperty("WhitePlayer")]
         public List<ChessGame>? WhiteGames { get; set; }
 
-        public List<ChessGame>? AllGames
-        {
-            get
-            {
-                if (BlackGames == null && WhiteGames == null) return null;
-                if (BlackGames == null) return WhiteGames;
-                if (WhiteGames == null) return BlackGames;
-                
-                var games = BlackGames.Concat(WhiteGames).ToList();
-                return games;
-            }
+        //[NotMapped]
+        //private List<ChessGame>? _allGames;
 
-        }
+        //public List<ChessGame>? AllGames
+        //{
+        //    get
+        //    {
+        //        if (_allGames == null)
+        //        {
+        //            if (BlackGames == null && WhiteGames == null)
 
-        public int? Rating { get; set; }
+        //                _allGames = null;
+
+        //            else if (BlackGames == null)
+        //            {
+        //                _allGames = WhiteGames;
+        //            }
+        //            else if (WhiteGames == null)
+        //            {
+        //                _allGames = BlackGames;
+        //            }
+        //            else
+        //            {
+        //                _allGames = BlackGames.Concat(WhiteGames).ToList();
+        //            }
+        //        }
+
+        //        return _allGames;
+
+        //    }
+        //    set
+        //    {
+        //        _allGames = value;
+        //    }
+
+        //}
+
 
     }
 }

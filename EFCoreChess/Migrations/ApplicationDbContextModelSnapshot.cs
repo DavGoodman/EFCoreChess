@@ -53,7 +53,7 @@ namespace EFCoreChess.Migrations
 
                     b.HasIndex("WhitePlayerId");
 
-                    b.ToTable("ChessGames");
+                    b.ToTable("ChessGames", (string)null);
 
                     b.HasData(
                         new
@@ -113,7 +113,7 @@ namespace EFCoreChess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Players");
+                    b.ToTable("Players", (string)null);
 
                     b.HasData(
                         new
