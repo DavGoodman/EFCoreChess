@@ -9,5 +9,7 @@
         public Player BlackPlayer { get; set; }
         public DateTime Date { get; set; }
         public int WinnerId { get; set; }
+        public ChessTournament? ChessTournament { get; set; }
+        public int? ChessTournamentId { get; set; }
     }
 }

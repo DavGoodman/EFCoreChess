@@ -41,6 +41,8 @@ namespace EFCoreChess
 
         public DbSet<Player> Players { get; set; }
         public DbSet<ChessGame> ChessGames { get; set; }
+        public DbSet<ChessTournament> ChessTournaments { get; set; }
+        public DbSet<PlayerChessTournament> PlayerChessTournaments { get; set; }
 
     }
 }

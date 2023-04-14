@@ -4,16 +4,11 @@ namespace EFCoreChess.Entities
 {
     public class Player
     {
-        //public Player()
-        //{
-        //    _allGames = new List<ChessGame>();
-        //}
 
         public int Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
         public int? Rating { get; set; }
-
 
 
         [InverseProperty("BlackPlayer")]
@@ -22,6 +17,8 @@ namespace EFCoreChess.Entities
 
         [InverseProperty("WhitePlayer")]
         public List<ChessGame>? WhiteGames { get; set; }
+
+        public List<PlayerChessTournament> PlayerChessTournaments { get; set; }
 
         //[NotMapped]
         //private List<ChessGame>? _allGames;

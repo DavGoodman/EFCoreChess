@@ -4,6 +4,7 @@ using EFCoreChess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreChess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230414090104_ChessTournament")]
+    partial class ChessTournament
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,7 +95,6 @@ namespace EFCoreChess.Migrations
                         {
                             Id = 5,
                             BlackPlayerId = 3,
-                            ChessTournamentId = 1,
                             Date = new DateTime(2023, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WhitePlayerId = 2,
                             WinnerId = 2
@@ -101,7 +103,6 @@ namespace EFCoreChess.Migrations
                         {
                             Id = 6,
                             BlackPlayerId = 2,
-                            ChessTournamentId = 1,
                             Date = new DateTime(2023, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WhitePlayerId = 1,
                             WinnerId = 1
@@ -110,7 +111,6 @@ namespace EFCoreChess.Migrations
                         {
                             Id = 7,
                             BlackPlayerId = 2,
-                            ChessTournamentId = 1,
                             Date = new DateTime(2023, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WhitePlayerId = 3,
                             WinnerId = 3
@@ -119,7 +119,6 @@ namespace EFCoreChess.Migrations
                         {
                             Id = 8,
                             BlackPlayerId = 1,
-                            ChessTournamentId = 1,
                             Date = new DateTime(2023, 3, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             WhitePlayerId = 3,
                             WinnerId = 1
@@ -141,7 +140,7 @@ namespace EFCoreChess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChessTournaments");
+                    b.ToTable("ChessTournament");
 
                     b.HasData(
                         new
@@ -159,6 +158,9 @@ namespace EFCoreChess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ChessTournamentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -173,6 +175,8 @@ namespace EFCoreChess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChessTournamentId");
 
                     b.ToTable("Players");
 
@@ -222,7 +226,7 @@ namespace EFCoreChess.Migrations
 
                     b.HasIndex("ChessTournamentId");
 
-                    b.ToTable("PlayerChessTournaments");
+                    b.ToTable("PlayerChessTournament");
 
                     b.HasData(
                         new
@@ -270,6 +274,13 @@ namespace EFCoreChess.Migrations
                     b.Navigation("WhitePlayer");
                 });
 
+            modelBuilder.Entity("EFCoreChess.Entities.Player", b =>
+                {
+                    b.HasOne("EFCoreChess.Entities.ChessTournament", null)
+                        .WithMany("Players")
+                        .HasForeignKey("ChessTournamentId");
+                });
+
             modelBuilder.Entity("EFCoreChess.Entities.PlayerChessTournament", b =>
                 {
                     b.HasOne("EFCoreChess.Entities.ChessTournament", "ChessTournament")
@@ -294,6 +305,8 @@ namespace EFCoreChess.Migrations
                     b.Navigation("Games");
 
                     b.Navigation("PlayerChessTournaments");
+
+                    b.Navigation("Players");
                 });
 
             modelBuilder.Entity("EFCoreChess.Entities.Player", b =>

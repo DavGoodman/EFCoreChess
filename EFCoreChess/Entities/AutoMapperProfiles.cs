@@ -22,6 +22,12 @@ namespace EFCoreChess.Entities
                 .ForMember(dto => dto.Games, ent =>
                     ent.MapFrom(src => src.WhiteGames.Union(src.BlackGames)));
 
+            CreateMap<PlayerChessTournament, PlayerTournamentDTO>()
+                .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Player.Name));
+
+            CreateMap<ChessTournament, ChessTournamentDTO>()
+                .ForMember(dto => dto.Players, ent => ent.MapFrom(src => src.PlayerChessTournaments));
+
             // POST DTOs
 
 
