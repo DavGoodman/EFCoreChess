@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EFCoreChess.DTOs.GetDTOs;
+using EFCoreChess.DTOs.PostDTOs;
+using EFCoreChess.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +32,16 @@ namespace EFCoreChess.Controllers
             if(chessGames == null) return NotFound();
 
             return Ok(chessGames);
+        }
+
+        [HttpPost("new")]
+        public async Task<ActionResult> Post(ChessGamePostDTO chessGamePostDTO)
+        {
+            var chessGame = mapper.Map<ChessGame>(chessGamePostDTO);
+
+            context.Add(chessGame);
+            await context.SaveChangesAsync();
+            return Ok(chessGame);
         }
 
     }

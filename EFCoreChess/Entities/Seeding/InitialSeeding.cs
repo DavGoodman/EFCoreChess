@@ -6,13 +6,19 @@ namespace EFCoreChess.Entities.Seeding
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
-            var MagnusCarlsen = new Player { Id = 1, Name = "Magnus Carlsen", Country = "Norway", Rating = 2870 };
-            var FabianoCaruana = new Player { Id = 2, Name = "Fabiano Caruana", Country = "USA", Rating = 2822 };
-            var HikaruNakamura = new Player { Id = 3, Name = "Hikaru Nakamura", Country = "USA", Rating = 2780 };
-            var LevyRossman = new Player { Id = 4, Name = "Levy Rossman", Country = "USA", Rating = 2400 };
+            var MagnusCarlsen = new Player { Id = 1, Name = "Magnus Carlsen", Country = "Norway" };
+            var FabianoCaruana = new Player { Id = 2, Name = "Fabiano Caruana", Country = "USA" };
+            var HikaruNakamura = new Player { Id = 3, Name = "Hikaru Nakamura", Country = "USA" };
+            var LevyRossman = new Player { Id = 4, Name = "Levy Rozman", Country = "USA" };
 
             modelBuilder.Entity<Player>().HasData(MagnusCarlsen, FabianoCaruana, HikaruNakamura, LevyRossman);
 
+            var magnusDetil = new PlayerDetail { Id = 1, Rating = 2870 };
+            var FabianosDetil = new PlayerDetail { Id = 2, Rating = 2775};
+            var HikaruDetil = new PlayerDetail { Id = 3, Rating = 2747 };
+            var LevyDetil = new PlayerDetail { Id = 4, Rating = 2322 };
+
+            modelBuilder.Entity<PlayerDetail>().HasData(magnusDetil, FabianosDetil, HikaruDetil, LevyDetil);
 
             var ChessGame1 = new ChessGame
             {

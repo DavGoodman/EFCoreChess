@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EFCoreChess.DTOs.GetDTOs;
+using EFCoreChess.DTOs.PostDTOs;
 
 namespace EFCoreChess.Entities
 {
@@ -16,7 +17,7 @@ namespace EFCoreChess.Entities
                         ? null
                         : src.WinnerId == src.BlackPlayerId
                         ? src.BlackPlayer.Name : src.WhitePlayer.Name))
-                .ForMember(ent => ent.Date, ent => ent.MapFrom(src => src.Date.ToString("yyyy-mm-dd")));
+                .ForMember(ent => ent.Date, ent => ent.MapFrom(src => src.Date.ToString("yyyy-MM-dd")));
 
             CreateMap<Player, PlayerWithGamesDTO>()
                 .ForMember(dto => dto.Games, ent =>
@@ -29,6 +30,7 @@ namespace EFCoreChess.Entities
                 .ForMember(dto => dto.Players, ent => ent.MapFrom(src => src.PlayerChessTournaments));
 
             // POST DTOs
+            CreateMap<ChessGamePostDTO, ChessGame>();
 
 
 
